@@ -13,8 +13,10 @@ import {
   import { Menu } from "antd";
   import React from "react";
   import { Link } from "react-router-dom";
+import { _useLogin } from "../../../logic/actions/_common";
   // import useActive from "../../../hooks/useActive";
-  
+ 
+
   const menuList = [
     {
       gap: false,
@@ -50,6 +52,7 @@ import {
   
   const LeftCol = () => {
     // const { isActive } = useActive();
+  const {logout} = _useLogin();
   
     return (
       <>
@@ -83,7 +86,7 @@ import {
                 </div>
               }
             >
-              <span> Logout</span>
+              <span onClick={logout}> Logout</span>
             </Menu.Item>
           </Menu>
         </div>

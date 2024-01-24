@@ -9,7 +9,7 @@ export const _useLogin = () =>{
     const {auth, setAuth} = _AuthContext();
     const router = useNavigate()
  const [loginData, setLoginData] =  useState(
-    {email:"clientA@gmail.com",password:"hadi.."});
+    {email:"",password:"hadi.."});
     const [loading, setLoading] = useState(false);
 
  const changeHandler = (e) =>{
@@ -21,6 +21,7 @@ export const _useLogin = () =>{
     setLoading(true);
     try {
         const res = await axios.post("auth/signin",loginData);
+    //    console.log(res.data,"from commonjs");
         if(res.status === 200)
         {
           setAuth(res.data);

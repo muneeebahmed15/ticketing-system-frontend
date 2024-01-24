@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ClientLayout from '../layout'
 import PanelHeading from '../../components/PanelHeading'
-import { FolderOpenOutlined, FolderOutlined } from '@ant-design/icons'
+import { FolderOpenOutlined } from '@ant-design/icons'
 import { __useOpenTicket } from '../../../logic/actions/_client-ticket'
-import RequestDetail from './request-detail'
+import { Link } from 'react-router-dom'
 
 
 const ClientOpenTickets = () => {
-  const [openDetail, setOpenDetail]=useState(false)
-  const [currentItem, setCurrentItem] = useState({})
  const {loading, list} = __useOpenTicket();
   
 
@@ -18,7 +16,7 @@ const ClientOpenTickets = () => {
       title={"Open Requests"} />
 
 
-      <div className='table-responsive'>
+<div className='table-responsive'>
         <table className='table'>
           <thead>
             <tr>
@@ -39,19 +37,14 @@ const ClientOpenTickets = () => {
               <td>{x.priority} </td>
               <td>{x.category.name}</td>
               <td>{x.status}</td>
-              <td role='button'>
-              {!openDetail ?<FolderOutlined onClick={()=>{
-                setOpenDetail(true)
-                setCurrentItem({_id:x._id, title:x.title})
-              }}/> :  <FolderOpenOutlined />}
-               
+              <td>
+             <Link to={`/client/request-detail/${x._id}`}> <FolderOpenOutlined /> </Link>
                 </td>
             </tr>
             ))}
           </tbody>
         </table>
 
-<RequestDetail open={openDetail} setOpen={setOpenDetail} ticket={currentItem}/>
 
       </div>
     </ClientLayout>

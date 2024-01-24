@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { _useLogin } from '../../logic/actions/_common'
 import { _AuthContext } from '../../logic/context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const {auth} = _AuthContext();
@@ -9,13 +9,16 @@ const Login = () => {
   
  const{submit, changeHandler, loginData, loading} = _useLogin();
  
+const rolesss = auth?.redirectTo;
+console.log(rolesss)
+
  useEffect(()=>{
   if(auth?.token){
-    router("/client")
+    router(`/${rolesss}`)
    }
  },[auth])
 
-console.log(auth,"abc")
+// console.log(auth,"abc")
 
  return (
     <div style={{minHeight:"100vh",display:"flex",justifyContent:"center",alignItems:"center"}}>
