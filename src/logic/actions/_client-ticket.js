@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { _AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
 
 
 export const __useOpenTicket =() =>{
@@ -35,15 +37,79 @@ export const __useOpenTicket =() =>{
     return{ loading , list }
 };
 
+//other  option
+export const __useGetList =(url) =>{
+    const [loading, setLoading]  = useState(false);
+    const [list, setList]  = useState([]);
+
+    const {auth} = _AuthContext();
+    const authToken = auth && auth?.token;
+   
+    const fetchingList = async () =>{
+       setLoading(true);
+
+       try {
+           const res = await axios.get(url);
+           console.log(res)
+           if(res.status===200){
+               setList(res.data.tickets);
+           }
+       } catch (error) {
+           console.log(error)
+       }finally{
+           setLoading(false)
+       }
+   }
+   
+       useEffect(()=>{
+           if(authToken){
+           fetchingList();
+       }
+       },[authToken])
+   
+       return{ loading , list }
+}
 
 
 
-export const useResolvedTicket =() =>{}
+export const useResolvedTicket =() =>{
+    const [loading, setLoading]  = useState(false);
+    const [list, setList]  = useState([]);
+
+    const {auth} = _AuthContext();
+    const authToken = auth && auth?.token;
+   
+    const fetchingList = async () =>{
+       setLoading(true);
+
+       try {
+           const res = await axios.get("ticket/resolved-ticket");
+           console.log(res)
+           if(res.status===200){
+            //    setList(res.data.tickets);
+           }
+       } catch (error) {
+           console.log(error)
+       }finally{
+           setLoading(false)
+       }
+   }
+   
+       useEffect(()=>{
+           if(authToken){
+           fetchingList();
+       }
+       },[authToken])
+   
+       return{ loading , list }
+}
 
 
 export const __useSingleTicket =(id)=>{
     const {auth} = _AuthContext();
  const authToken =    auth && auth?.token;
+
+ const router = useNavigate();
 
  const [singleItem, setSingleItem] = useState({})
  const [loading, setLoading] = useState(false)
@@ -76,6 +142,7 @@ export const __useSingleTicket =(id)=>{
         }
         },[authToken, id])
     
+        
        const doComment = async () =>{
             setLoading(true);
             try {
@@ -110,6 +177,24 @@ export const __useSingleTicket =(id)=>{
                 setLoading(false);
             }
         }
+
+        const closeTicket = async() =>{
+            setLoading(true);
+            try {
+                const res = await axios.put(`/ticket/update-to-resolved/${id}`)
+               console.log(res)
+                if(res.status ===200){
+                    toast.success(res.data.msg)
+                    router("/client/resolved-request")
+                    }
+            } catch (error) {
+                console.log(error);
+                toast.error("Failed, try again.");
+            }
+            finally{
+                setLoading(false);
+            }
+        }
     
-    return{ loading, singleItem, comment, setComment, doComment, deleteComment}
+    return{ loading, singleItem, comment, setComment, doComment, deleteComment, closeTicket}
 }

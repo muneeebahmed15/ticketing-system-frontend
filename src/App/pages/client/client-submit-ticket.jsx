@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import ClientLayout from '../layout'
 import { SnippetsOutlined } from '@ant-design/icons'
-import PanelHeading from '../../components/PanelHeading'
-import { Button, Card, Form, Input, Select } from 'antd'
+import PanelHeading from '../../components/common/PanelHeading';
+import { Button,  Form, Input, Select } from 'antd'
 import { _useCategories } from '../../../logic/actions/_categories'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -23,7 +22,7 @@ const ClientSubmitTicket = () => {
       if(res.status ===201)
       {
         toast.success("Ticket Created Successfully");
-        router("/client/open-requests")
+        router("/client/open-request")
       }
     } catch (error) {
       console.log(error)
@@ -36,7 +35,7 @@ const ClientSubmitTicket = () => {
   }
 
   return (
-    <ClientLayout>
+    <>
     <PanelHeading icon={<SnippetsOutlined  className='its-icon'/>}
      title={"Submit Request"} para={"I am submit request"}/>
      
@@ -85,7 +84,7 @@ const ClientSubmitTicket = () => {
       <Button className='myBtn' loading={loading} htmlType='submit'>Submit</Button>
       </div>
       </Form>
-    </ClientLayout>
+    </>
   )
 }
 

@@ -41,6 +41,7 @@ export const _useLogin = () =>{
 const logout =() =>{
     Cookies.remove("auth");
     setAuth({user:null, token:""})
+    console.log("logout")
     router("/")
 }
 

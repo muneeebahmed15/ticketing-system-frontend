@@ -1,15 +1,13 @@
-import { Col, Row } from "antd";
-import LeftCol from "./LeftCol";
-import LayoutHeader from "./LayoutHeader";
+import { Col, Row } from 'antd'
+import Sidebar from './Siderbar'
+import LayoutHeader from './LayoutHeader'
 
-import "../../../assets/layout.css";
-
-const AgentLayout = ({ children }) => {
+const Layout = ({children}) => {
   return (
     <>
       <Row style={{ minHeight: "100vh" }} className={"main-db_layout"}>
         <Col md={4} xs={0} className="fixedColumn leftColumn border-end">
-          <LeftCol />
+          <Sidebar />
         </Col>
         <Col md={20} xs={24} className="centerColumn ">
           <LayoutHeader />
@@ -17,7 +15,8 @@ const AgentLayout = ({ children }) => {
         </Col>
       </Row>
     </>
-  );
-};
+    
+  )
+}
 
-export default AgentLayout;
+export default Layout

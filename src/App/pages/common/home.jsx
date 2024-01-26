@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import {Link, useNavigate} from "react-router-dom"
-import { AuthContext, _AuthContext } from '../../logic/context/AuthContext'
-import { _useLogin } from '../../logic/actions/_common'
+import { AuthContext, _AuthContext } from '../../../logic/context/AuthContext'
+import { _useLogin } from '../../../logic/actions/_common'
 
 const Home = () => {
   const {logout} = _useLogin();

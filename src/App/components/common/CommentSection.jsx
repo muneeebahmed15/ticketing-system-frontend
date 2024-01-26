@@ -1,10 +1,10 @@
 import { Avatar, Button, Card, Input, List } from 'antd'
 import React, { useState } from 'react'
-import { __useSingleTicket } from '../../logic/actions/_client-ticket'
+import { __useSingleTicket } from '../../../logic/actions/_client-ticket'
 import { CommentOutlined, DeleteOutlined } from '@ant-design/icons'
 import ClientCommentReply from './ClientCommentReply'
 
-const ClientComment = ({comment, setComment,loading, doComment, singleItem, auth, deleteComment}) => {
+const CommentSection = ({comment, setComment,loading, doComment, singleItem, auth, deleteComment}) => {
        
    const [open, setOpen] = useState(false)
    const [currentComment, setCurrentComment] = useState({})
@@ -81,4 +81,4 @@ const ClientComment = ({comment, setComment,loading, doComment, singleItem, auth
   )
 }
 
-export default ClientComment
+export default CommentSection

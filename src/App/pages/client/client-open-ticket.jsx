@@ -1,6 +1,5 @@
 import React from 'react'
-import ClientLayout from '../layout'
-import PanelHeading from '../../components/PanelHeading'
+import PanelHeading from '../../components/common/PanelHeading';
 import { FolderOpenOutlined } from '@ant-design/icons'
 import { __useOpenTicket } from '../../../logic/actions/_client-ticket'
 import { Link } from 'react-router-dom'
@@ -11,7 +10,7 @@ const ClientOpenTickets = () => {
   
 
   return (
-    <ClientLayout>
+    <>
       <PanelHeading icon={<FolderOpenOutlined className="its-icon"/>}
       title={"Open Requests"} />
 
@@ -47,7 +46,7 @@ const ClientOpenTickets = () => {
 
 
       </div>
-    </ClientLayout>
+    </>
   )
 }
 
