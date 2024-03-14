@@ -4,7 +4,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './pages/common/home';
 import Login from './pages/common/login';
 import { ClientDashboard, ClientOpenTickets, ClientResolvedTicket, ClientRoutes, ClientSubmitTicket, RequestDetail } from './pages/client';
-import { AgentDashboard, AgentPickedTickets, AgentResolveTicket, AgentRoutes, Bucket, OpenDetailTicket } from './pages/agent';
+import { AgentDashboard, AgentPickedTickets, AgentResolveTicket, AgentRoutes, Bucket, HandoverTicket, OpenDetailTicket } from './pages/agent';
 
 
 
@@ -29,11 +29,13 @@ const App = () => {
 
 //Agent Routes
 <Route path='/agent' element={<AgentRoutes/>}>
-  <Route path='/agent/dashboard' element={<AgentDashboard/>}/>
-  <Route path='/agent/bucket' element={<Bucket/>}/>
-  <Route path='/agent/picked-tickets' element={<AgentPickedTickets/>}/>
-  <Route path='/agent/resolved-tickets' element={<AgentResolveTicket/>}/>
-  <Route path='/agent/detail/:id' element={<OpenDetailTicket/>}/>
+  <Route path='dashboard' element={<AgentDashboard/>}/>
+  <Route path='bucket' element={<Bucket/>}/>
+  <Route path='picked-tickets' element={<AgentPickedTickets/>}/>
+  <Route path='resolved-tickets' element={<AgentResolveTicket/>}/>
+  <Route path='detail/:id' element={<OpenDetailTicket/>}/>
+  <Route path='handover-to-me' element={<HandoverTicket/>}/>
+  <Route path='handover/detail/:id' element={<OpenDetailTicket/>}/>
 </Route>
 
  </Routes>

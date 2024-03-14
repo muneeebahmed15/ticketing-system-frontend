@@ -1,12 +1,12 @@
 import { useContext, useState } from "react"
 import axios from "axios"
-import {AuthContext, _AuthContext} from "../context/AuthContext"
+import { _AuthContext } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie"
 
 
 export const _useLogin = () =>{
-    const {auth, setAuth} = _AuthContext();
+    const { setAuth} = _AuthContext();
     const router = useNavigate()
  const [loginData, setLoginData] =  useState(
     {email:"",password:"hadi.."});

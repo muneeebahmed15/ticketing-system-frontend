@@ -1,4 +1,4 @@
-import { __useGetList } from "../../../logic/actions/_client-ticket"
+import { __UseReopenTc, __useGetList } from "../../../logic/actions/_client-ticket"
 import PanelHeading from "../../components/common/PanelHeading"
 import {FolderOpenOutlined} from '@ant-design/icons';
 import { Button, Card, Col, Row, Tag } from "antd";
@@ -11,6 +11,7 @@ const ResolvedBy = (x)=>{
 
 const ClientResolvedTicket = () => {
  const {loading, list} = __useGetList("ticket/resolved-tickets")
+ const {toReopenTc, loading:reopenLoading} = __UseReopenTc();
   return (
     <>
     <PanelHeading title={loading? "Loading...":"Resolved Tickets"} icon={<FolderOpenOutlined/>}/>
@@ -33,7 +34,7 @@ const ClientResolvedTicket = () => {
       </div>
 
       <div className="mt-3 pt-3 border-top">
-        <Button icon={<FolderOpenOutlined/>} className="myBtn"> Claim to reopen</Button>
+        <Button icon={<FolderOpenOutlined/>} className="myBtn" loading={reopenLoading} onClick={()=>toReopenTc(x._id  )}> Claim to reopen</Button>
       </div>
       </Card>
 ))}

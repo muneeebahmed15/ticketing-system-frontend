@@ -198,3 +198,23 @@ export const __useSingleTicket =(id)=>{
     
     return{ loading, singleItem, comment, setComment, doComment, deleteComment, closeTicket}
 }
+
+export const __UseReopenTc = () =>{
+    const [loading, setLoading] = useState(false);
+
+    const toReopenTc = async (id)=>{
+        setLoading(true);
+        try {
+            const res = await axios.put(`ticket/reopen-ticket/${id}`)
+            if(res.status === 200){
+            toast.success("Ticket is reopened");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        finally{
+            setLoading(false);
+        }
+    }
+        return {toReopenTc, loading}
+}

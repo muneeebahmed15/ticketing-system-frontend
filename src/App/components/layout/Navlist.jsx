@@ -19,12 +19,12 @@ export const  agentList = [
       path: "/agent/picked-tickets",
       Icon: <DiffOutlined />,
     },
-    {
-      gap: false,
-      name: "Handover Tickets",
-      path: "/agent/handover-tickets",
-      Icon: <SettingOutlined />,
-    },
+    // {
+    //   gap: false,
+    //   name: "Handover Tickets",
+    //   path: "/agent/handover-tickets",
+    //   Icon: <SettingOutlined />,
+    // },
     {
       gap: false,
       name: "Assign Tickets",
@@ -35,6 +35,12 @@ export const  agentList = [
       gap: false,
       name: "Resolved Tickets",
       path: "/agent/resolved-tickets",
+      Icon: <SettingOutlined />,
+    },
+    {
+      gap: false,
+      name: "Handover Tickets",
+      path: "/agent/handover-to-me",
       Icon: <SettingOutlined />,
     },
     {

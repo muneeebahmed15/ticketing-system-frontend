@@ -91,6 +91,7 @@ export const useSingleTicket = (id) => {
 
   const [ticket, setTicket] = useState({});
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const [comment, setComment] = useState("")
 
@@ -122,8 +123,15 @@ export const useSingleTicket = (id) => {
     setLoading(true);
     try {
       const res = await axios.put("ticket/escalate", { ticketId, why });
+      console.log(res.status)
+      if(res.status === 200){
+        toast.success("Ticket escalated to manager");
+        router("/agent/picked-tickets")
+        setOpen(false);
+      }
      } catch (error) {
       console.log(error);
+      toast.error("Error! Please try again");
     } finally {
       setLoading(false);
     }
@@ -193,7 +201,9 @@ const closeTicket = async() =>{
     setComment,
     comment,
     deleteComment,
-    closeTicket
+    closeTicket,
+    open,
+    setOpen
   };
 };
 
@@ -228,4 +238,52 @@ export const useResolvedTicket =() =>{
      },[authToken])
  
      return{ loading , list }
+}
+
+export const useAvailableAgent = (isOpen) =>{
+ const [loading, setLoading] = useState(false);
+ const [list, setList] =  useState([]);
+ const router = useNavigate();
+
+ const fetchUserData = async()=>{
+  setLoading(true);
+  try {
+    const res = await axios.get("user/available-for-handover")
+    if(res.status === 200){
+      setList(res.data.users)
+    }
+  } catch (error) {
+    console.log(error)
+  }finally{
+    setLoading(false)
+  }
+}
+
+ useEffect(()=>{
+  if(isOpen){
+fetchUserData()
+  }
+
+ },[isOpen])
+
+
+let reason ="no reason"
+
+ const handoverTc =  async(ticketId, newAgentId,  name)=>{
+setLoading(true);
+  try {
+      const res = await axios.put("ticket/handover-ticket",{ticketId, newAgentId, reason})
+      toast.success(`Ticket handover to ${name}`)
+      router("/agent/picked-tickets")
+  } catch (error) {
+    console.log(error)
+  }finally{
+    setLoading(false)
+  }
+ }
+
+
+ return{
+  loading, list, handoverTc
+ }
 }

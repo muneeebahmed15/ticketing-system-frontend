@@ -10,14 +10,6 @@ const AuthProvider = ({children}) =>{
     const [auth, setAuth] = useState({user:null, token:""})
 
     // console.log(auth,"from authcoontext")
-
-    useEffect(()=>{
-        let user =  Cookies.get("auth"); 
-       
-        if(user){
-            setAuth(JSON.parse(user))
-        }
-    },[])
     
     axios.defaults.baseURL = "http://localhost:8000";
     axios.defaults.headers.common["Cookies"] = auth.token;
